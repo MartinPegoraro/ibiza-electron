@@ -1,0 +1,136 @@
+body {
+    background-image: url('../img/paquete.png');
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+}
+h1{
+    font-family: cursive;
+    font-size: 40px;
+}
+
+h1 {
+    transition: color 500ms, transform 500ms;
+}
+
+h1:hover{
+    background: transparent;
+    color: red;
+    transform: scale(1.50, 1.50);
+}
+
+#bloque{
+    margin-left: 40%;
+}
+
+form #name, form #price{
+    width: 255px;
+    height: 25px;
+}
+form #menu{
+    width: 263px;
+    height: 25px;
+}
+
+form button{
+    background-color: rgb(188, 188, 252);
+    width: 100px;
+    height: 50px;
+    margin-left: 9%;
+}
+
+#form-cant{
+    text-align: center;
+}
+li div button{
+    width: 70px;
+    height: 30px;
+    background: linear-gradient(0.25turn, #f3736f, #8478f3);
+}
+li div input{
+    width: 70px;
+    height: 24px;
+}
+
+
+#sum{
+    color: red;
+    width: 40%; 
+    height: 50px; 
+    border: 3px solid black;
+    font-size: 30px;
+}
+#sum #texto{
+    color: black;
+}
+
+hr{
+   
+    display: block;
+    height: 1px;
+    width: auto;
+    background-color: black;
+
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;   
+    width: 99%;
+    color:black;
+    font-size: 20px;
+    padding-inline-start: 0px;
+    
+}
+ul li{
+    border: 2px solid black;
+    background-image: linear-gradient(rgb(255, 255, 255, 0.6),rgba(204, 204, 204, 0.6)),url(../img/dog2.jpg);    
+    background-size: cover;
+    margin: 10px 0;
+    width: calc(33% - 10px);
+    text-transform: uppercase;
+    height: auto;
+    text-align: center;
+    list-style-type: none;
+}
+ul li p{
+    font-size: 25px;
+  
+}
+
+#eliminar{
+   background: orangered;
+   margin-top: 30px;
+   margin: 10px;
+   width: 70px;
+   height: 30px;
+   font-size: 15px;
+}
+
+#editar{
+    margin-top: 30px;
+    background: rgb(0, 183, 255);
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+ }
+
+#idd{
+    display: none;
+}
+
+ul li div input[type=number]{   
+    margin: 1px;
+    width: 100px;
+}
+
+#contenedor{
+    width: 100%;
+    height: auto;
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 10px;
+    background-color: rgba(228, 226, 226, 0.5);
+    
+}

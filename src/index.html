@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBIZA</title>
+    <link rel="stylesheet" href="./ui/app.css">
+
+</head>
+
+<body>
+
+    <h1 id="logo">IBIZA</h1>
+
+    <div id="bloque">
+        <form id="product">
+            <input type="text" id="name" placeholder="Nombre del producto" autofocus> <br>
+            <select name="" id="menu">
+                <option value="" disabled selected>Seleccione una categoria</option>
+                <option value="pizzas">Pizzas</option>
+                <option value="sandwiches">Sandwiches</option>
+                <option value="empanadas">Empanadas</option>
+                <option value="pollos">Pollo al plato</option>
+                <option value="lomos">Lomo al plato</option>
+                <option value="milanesas">Milanesa</option>
+                <option value="tortillas">Tortillas</option>
+                <option value="guarniciones">Guarniciones</option>
+                <option value="pastas">Pastas</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="vinos">Vinos</option>
+                <option value="cervezas">Cerveza</option>
+                <option value="tragos">Tragos</option>
+                <option value="postres">Postres</option>
+            </select>
+            <br>
+            <input type="number" id="price" placeholder="Precio del producto" min="0"> <br>
+            <textarea id="description" cols="30" rows="10" placeholder="Descripcion del producto"></textarea><br>
+            <button type="submit">Guardar</button>
+
+        </form>
+    </div>
+    <br>
+
+    <div id="sum">
+        <span id="texto">La Suma total es de: </span> <span id="canTotal"></span>
+    </div>
+
+    <br>
+    <br>
+    <div id="productList">
+        <div id="contenedor">
+            <h1 id="pizza">PIZZAS</h1>
+            <ul id="productPizza"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="sandwiches">SANDWICHES</h1>
+            <ul id="productSandwiche"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="empanada">EMPANADAS</h1>
+            <ul id="productEmpanada"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="pollo">POLLO AL PLATO</h1>
+            <ul id="productPollo"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="lomo">LOMO AL PLATO</h1>
+            <ul id="productLomo"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="milanesa">MILANESA</h1>
+            <ul id="productMilanesa"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="toritlla">TORTILLAS</h1>
+            <ul id="productTortilla"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="guarnicion">GUARNICIONES</h1>
+            <ul id="productGuarnicion"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="pasta">PASTAS</h1>
+            <ul id="productPasta"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="bebida">BEBIDAS</h1>
+            <ul id="productBebida"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="vino">VINOS</h1>
+            <ul id="productVino"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="cerveza">CERVEZA</h1>
+            <ul id="productCerveza"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="trago">TRAGOS</h1>
+            <ul id="productTrago"></ul>
+        </div>
+        <div id="contenedor">
+            <h1 id="postre">POSTRES</h1>
+            <ul id="productPostre"></ul>
+        </div>
+
+        </ul>
+    </div>
+
+
+    <script src="ui/app.js"></script>
+
+
+</body>
+
+</html>
