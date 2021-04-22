@@ -27,12 +27,14 @@ let tasks = [];
 let updateStatus = false;
 let idUpdate = ''
 
+
 function deleteTask(id) {
     ipcRenderer.send('delete-task', id)
 }
 
 // editar y completar el formulario
 function updateTask(id) {
+    productName.focus();
     updateStatus = true;
     idUpdate = id;
     const task = tasks.find(i => i._id === id)
@@ -52,9 +54,9 @@ function addCant(id) {
     tasks.find(i => {
         if (i._id === id) {
             mult = i.price * cantid
-            console.log(mult)
             acum = acum + mult
             document.getElementById("canTotal").innerHTML = acum;
+
         }
 
     })
@@ -70,7 +72,6 @@ function restCant(id) {
     tasks.find(i => {
         if (i._id === id) {
             mult = i.price * cantid
-            console.log(mult)
             acum = acum - mult
             document.getElementById("canTotal").innerHTML = acum;
         }
@@ -119,7 +120,7 @@ function renderTasks(tasks) {
         //-----------------------------------
         if (i.menu === 'pizzas') {
             //dentro del div
-            botton.innerText = 'Restar', botton.onclick = e => { restCant(aidi) }
+            botton.innerText = 'Restar', botton.id = "rest", botton.onclick = e => { restCant(aidi) }
             button.innerText = 'Sumar', button.onclick = e => { addCant(aidi) }
             input.placeholder = 'Cantidad', input.type = "number", input.class = "cantidad", input.id = aidi, input.min = "0"
 
@@ -436,6 +437,7 @@ productForm.addEventListener('submit', e => {
     } else {
         ipcRenderer.send('update-task', { ...task, idUpdate })
     }
+    updateStatus = false
     productForm.reset();
 })
 
@@ -472,7 +474,7 @@ ipcRenderer.on('update-task-success', (e, args) => {
             i.name = updatedTask.name;
             i.price = updatedTask.price;
             i.description = updatedTask.description;
-            i.menu = updateTask.menu
+            i.menu = updatedTask.menu
         }
         return i;
     })

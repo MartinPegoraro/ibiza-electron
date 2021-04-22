@@ -41,7 +41,6 @@ function createWindow() {
             contextIsolation: false
         }
     })
-
     win.loadFile('src/index.html')
     let mainMenu = Menu.buildFromTemplate(templateMenu);
     win.setMenu(mainMenu);

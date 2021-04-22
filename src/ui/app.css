@@ -58,15 +58,17 @@ li div input{
     position: fixed;
     z-index: 1000;
     top: 0;
-    background-color: #a1a1a1;
+    background-color: #cacaca;
     color: red;
-    width: 40%; 
-    height: 50px; 
+    width: auto; 
+    height: auto; 
     border: 3px solid black;
     font-size: 30px;
+    font-weight: 700;
 }
 #sum #texto{
     color: black;
+   
 }
 
 hr{
