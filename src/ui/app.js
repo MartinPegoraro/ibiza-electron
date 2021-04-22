@@ -28,12 +28,7 @@ let updateStatus = false;
 let idUpdate = ''
 
 function deleteTask(id) {
-    const result = confirm('Esta seguro que desea eliminar este producto?')
-    if (result) {
-        ipcRenderer.send('delete-task', id)
-    }
-    return;
-
+    ipcRenderer.send('delete-task', id)
 }
 
 // editar y completar el formulario
@@ -48,48 +43,40 @@ function updateTask(id) {
 
 }
 
-
-
+// sumar productos
 var acum = 0
 function addCant(id) {
     saveId = id
     const cantid = document.getElementById(id).value
     var mult
-    const result = confirm(`Esta seguro que desea sumar ${cantid} veces este producto?`)
-    if (result) {
-        const task = tasks.find(i => {
-            if (i._id === id) {
-                mult = i.price * cantid
-                console.log(mult)
-                acum = acum + mult
-                document.getElementById("canTotal").innerHTML = acum;
-            }
+    tasks.find(i => {
+        if (i._id === id) {
+            mult = i.price * cantid
+            console.log(mult)
+            acum = acum + mult
+            document.getElementById("canTotal").innerHTML = acum;
+        }
 
-        })
-    }
-    return;
-
+    })
 
 }
 
+//restar productos
 function restCant(id) {
     saveId = id
     const cantid = document.getElementById(id).value
     var mult
-    const result = confirm(`Esta seguro que desea restar ${cantid} veces este producto?`)
 
-    if (result) {
-        const task = tasks.find(i => {
-            if (i._id === id) {
-                mult = i.price * cantid
-                console.log(mult)
-                acum = acum - mult
-                document.getElementById("canTotal").innerHTML = acum;
-            }
+    tasks.find(i => {
+        if (i._id === id) {
+            mult = i.price * cantid
+            console.log(mult)
+            acum = acum - mult
+            document.getElementById("canTotal").innerHTML = acum;
+        }
 
-        })
-    }
-    return;
+    })
+
 }
 
 //Recorrer el arreglo y mostrar por la vista

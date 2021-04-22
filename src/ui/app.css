@@ -55,6 +55,10 @@ li div input{
 
 
 #sum{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    background-color: #a1a1a1;
     color: red;
     width: 40%; 
     height: 50px; 
