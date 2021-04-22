@@ -19,8 +19,52 @@ const productTragos = document.querySelector('#productTrago');
 const productPostres = document.querySelector('#productPostre');
 
 const productSelect = document.getElementById('menu')
+const productList = document.querySelector('#productList');
 
 const { ipcRenderer, remote } = require('electron');
+
+function clickpizza() {
+    window.location.hash = '#pizza';
+}
+function clicksandw() {
+    window.location.hash = '#sandwiche';
+}
+function clickempanada() {
+    window.location.hash = '#empanada';
+}
+function clickpollo() {
+    window.location.hash = '#pollo';
+}
+function clicklomo() {
+    window.location.hash = '#lomo';
+}
+function clickmilanesa() {
+    window.location.hash = '#milanesa';
+}
+function clicktortilla() {
+    window.location.hash = '#toritlla';
+}
+function clickguar() {
+    window.location.hash = '#guarnicion';
+}
+function clickpasta() {
+    window.location.hash = '#pasta';
+}
+function clickbebida() {
+    window.location.hash = '#bebida';
+}
+function clickvino() {
+    window.location.hash = '#vino';
+}
+function clickbirra() {
+    window.location.hash = '#cerveza';
+}
+function clicktragos() {
+    window.location.hash = '#trago';
+}
+function clickpostres() {
+    window.location.hash = '#postre';
+}
 
 let tasks = [];
 
@@ -79,6 +123,9 @@ function restCant(id) {
     })
 
 }
+
+
+
 
 //Recorrer el arreglo y mostrar por la vista
 function renderTasks(tasks) {
@@ -480,3 +527,4 @@ ipcRenderer.on('update-task-success', (e, args) => {
     })
     renderTasks(tasks)
 })
+

@@ -11,6 +11,29 @@
 </head>
 
 <body>
+    <div class="menu-fixed">
+        <div id="botones">
+            <button id="piz" onclick="clickpizza()">Pizzas</button>
+            <button id="san" onclick="clicksandw()">Sandwiches</button>
+            <button id="emp" onclick="clickempanada()">Empanadas</button>
+            <button id="pol" onclick="clickpollo()">Pollos</button>
+            <button id="lom" onclick="clicklomo()">Lomos</button>
+            <button id="mil" onclick="clickmilanesa()">Milanesas</button>
+            <button id="tort" onclick="clicktortilla()">Tortillas</button>
+            <button id="guar" onclick="clickguar()">Guarniciones</button>
+            <button id="past" onclick="clickpasta()">Pastas</button>
+            <button id="bebi" onclick="clickbebida()">Bebidas</button>
+            <button id="vin" onclick="clickvino()">Vinos</button>
+            <button id="cerve" onclick="clickbirra()">Cervezas</button>
+            <button id="trag" onclick="clicktragos()">Tragos</button>
+            <button id="post" onclick="clickpostres()">Postres</button>
+        </div>
+    </div>
+
+    <div id="sum">
+        <span id="texto">La Suma total es de: </span> <span id="canTotal"></span>
+    </div>
+
 
     <h1 id="logo">IBIZA</h1>
 
@@ -41,12 +64,9 @@
 
         </form>
     </div>
+
+
     <br>
-
-    <div id="sum" class="menu-fixed">
-        <span id="texto">La Suma total es de: </span> <span id="canTotal"></span>
-    </div>
-
     <br>
     <br>
     <div id="productList">
@@ -55,7 +75,7 @@
             <ul id="productPizza"></ul>
         </div>
         <div id="contenedor">
-            <h1 id="sandwiches">SANDWICHES</h1>
+            <h1 id="sandwiche">SANDWICHES</h1>
             <ul id="productSandwiche"></ul>
         </div>
         <div id="contenedor">
