@@ -102,15 +102,14 @@ function addCant(id) {
     const cantid = document.getElementById(id).value;
 
 
-    const ab = tasks.filter(e => {
-
+    const task = tasks.find(task => {
+        return task._id === id
     })
 
-    console.log(ab)
 
     //guardar las fechas
     const fecha = {
-        name: productName.value,
+        name: task.name,
         date: dia.value,
         cantidad: cantid
     }
@@ -155,29 +154,6 @@ function restCant(id) {
     })
     document.getElementById(id).value = "";
 }
-
-
-// function renderVenta(ventas) {
-//     ventasSem.innerHTML = ''
-
-//     console.log(ventas)
-
-//     ventas.map(e => {
-
-//         tasks.map(t => {
-//             if (e.id === t._id) {
-//                 ventasSem.innerHTML += `
-
-//                 <li>producto: ${t.name} -- ${e.cantidad} </li>
-//             `
-//             }
-
-//         })
-
-//     })
-// }
-
-
 
 //Recorrer el arreglo y mostrar por la vista
 function renderTasks(tasks) {
