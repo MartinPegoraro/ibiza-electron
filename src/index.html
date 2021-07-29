@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBIZA</title>
     <link rel="stylesheet" href="./ui/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
 </head>
 
@@ -34,6 +36,7 @@
         <span id="texto">La Suma total es de: </span> <span id="canTotal"></span>
     </div>
 
+    <div id="ventasSem"></div>
 
     <h1 id="logo">IBIZA</h1>
 
@@ -60,11 +63,16 @@
             <br>
             <input step="any" type="number" id="price" placeholder="Precio del producto" min="0"> <br>
             <textarea id="description" cols="30" rows="10" placeholder="Descripcion del producto"></textarea><br>
-            <button type="submit">Guardar</button>
+            <button type="submit">Guarda</button>
 
         </form>
     </div>
 
+    <form id="productofecha">
+        <input type="date" id="dia">
+        <br>
+        <button id="enviar" type="submit">Enviar</button>
+    </form>
 
     <br>
     <br>
@@ -129,6 +137,7 @@
 
         </ul>
     </div>
+
 
 
     <script src="ui/app.js"></script>

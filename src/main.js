@@ -1,6 +1,7 @@
 const { BrowserWindow, ipcMain, Menu, app } = require('electron')
 
-const Task = require('./models/Task')
+const Task = require('./models/Task');
+const Fecha = require('./models/Fechas');
 
 let templateMenu = [
     {
@@ -14,6 +15,18 @@ let templateMenu = [
                 }
             }
         ]
+    },
+    {
+        label: 'Ventas',
+        submenu: [
+            {
+                label: 'Ventas anteriores',
+                click() {
+                    createVentas()
+                }
+            }
+        ]
+
     },
     {
         label: 'DevTools',
@@ -44,6 +57,18 @@ function createWindow() {
     win.loadFile('src/index.html')
     let mainMenu = Menu.buildFromTemplate(templateMenu);
     win.setMenu(mainMenu);
+}
+
+function createVentas() {
+    const winventa = new BrowserWindow({
+        width: 1500,
+        height: 700,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    })
+    winventa.loadFile('src/ventas.html')
 }
 
 ipcMain.on('new-task', async (e, args) => {
@@ -78,4 +103,12 @@ ipcMain.on('update-task', async (e, args) => {
     e.reply('update-task-success', JSON.stringify(updateTask))
 })
 
-module.exports = { createWindow };
+//crear y guardar las ventas del finde
+ipcMain.on('new-date', async (e, args) => {
+    const newDate = new Fecha(args)
+    const DateSaved = await newDate.save();
+    e.reply('new-date-create', JSON.stringify(DateSaved));
+})
+
+
+module.exports = { createWindow, createVentas };

@@ -21,6 +21,11 @@ const productPostres = document.querySelector('#productPostre');
 const productSelect = document.getElementById('menu')
 const productList = document.querySelector('#productList');
 
+const productFechas = document.querySelector('#productofecha');
+const dia = document.querySelector('#dia');
+
+const ventasSem = document.querySelector('#ventasSem')
+
 const { ipcRenderer, remote } = require('electron');
 
 function clickpizza() {
@@ -67,6 +72,8 @@ function clickpostres() {
 }
 
 let tasks = [];
+let fechas = [];
+// var ventas = [];
 
 let updateStatus = false;
 let idUpdate = ''
@@ -87,13 +94,40 @@ function updateTask(id) {
     productDescription.value = task.description
     productSelect.value = task.menu
 
-}
+};
 
 // sumar productos
 var acum = 0
 function addCant(id) {
-    saveId = id
-    const cantid = document.getElementById(id).value
+    const cantid = document.getElementById(id).value;
+
+
+    const ab = tasks.filter(e => {
+
+    })
+
+    console.log(ab)
+
+    //guardar las fechas
+    const fecha = {
+        name: productName.value,
+        date: dia.value,
+        cantidad: cantid
+    }
+
+    fechas.push(fecha)
+    ipcRenderer.send('new-date', fecha)
+
+
+
+    // const venta = {
+    //     id: id,
+    //     cantidad: cantid
+    // }
+
+    // ventas.push(venta);
+    // renderVenta(ventas)
+
     var mult
     tasks.find(i => {
         if (i._id === id) {
@@ -104,26 +138,44 @@ function addCant(id) {
         }
 
     })
-
+    document.getElementById(id).value = "";
 }
+
 
 //restar productos
 function restCant(id) {
-    saveId = id
     const cantid = document.getElementById(id).value
     var mult
-
     tasks.find(i => {
         if (i._id === id) {
             mult = i.price * cantid
             acum = acum - mult
             document.getElementById("canTotal").innerHTML = acum;
         }
-
     })
-
+    document.getElementById(id).value = "";
 }
 
+
+// function renderVenta(ventas) {
+//     ventasSem.innerHTML = ''
+
+//     console.log(ventas)
+
+//     ventas.map(e => {
+
+//         tasks.map(t => {
+//             if (e.id === t._id) {
+//                 ventasSem.innerHTML += `
+
+//                 <li>producto: ${t.name} -- ${e.cantidad} </li>
+//             `
+//             }
+
+//         })
+
+//     })
+// }
 
 
 
@@ -526,5 +578,21 @@ ipcRenderer.on('update-task-success', (e, args) => {
         return i;
     })
     renderTasks(tasks)
-})
+});
+
+//guardar las fechas
+// productFechas.addEventListener('submit', e => {
+//     e.preventDefault();
+//     console.log('abc', e);
+
+//     const fecha = {
+//         name: productName.value,
+//         date: dia.value
+//     }
+
+//     ipcRenderer.send('new-date', fecha)
+// })
+
+
+
 

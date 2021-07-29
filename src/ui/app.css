@@ -97,6 +97,10 @@ li div input{
    
 }
 
+#enviar{
+    margin: 0;
+}
+
 hr{
    
     display: block;
