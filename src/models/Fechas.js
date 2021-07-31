@@ -6,6 +6,7 @@ const newSchema = new Schema({
     },
     date: {
         type: Date,
+        required: true
     },
     cantidad: {
         type: Number

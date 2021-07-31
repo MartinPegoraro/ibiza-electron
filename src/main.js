@@ -103,11 +103,22 @@ ipcMain.on('update-task', async (e, args) => {
     e.reply('update-task-success', JSON.stringify(updateTask))
 })
 
+// PESTAÑA DE VENTAS
+
 //crear y guardar las ventas del finde
 ipcMain.on('new-date', async (e, args) => {
     const newDate = new Fecha(args)
     const DateSaved = await newDate.save();
     e.reply('new-date-create', JSON.stringify(DateSaved));
+})
+
+ipcMain.on('get-dates', async (e, args) => {
+    const fechas = await Fecha.find({ date: args }).sort({ name: -1 });
+    const oneFecha = await Fecha.findOne({ date: args })
+
+    const fec = oneFecha.date.toUTCString();
+
+    e.reply('get-dates', JSON.stringify(fechas), fec)
 })
 
 

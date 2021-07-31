@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(247, 144, 144);
+
+}
+
+#ventas {
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;  
+}
+
+#container {
+    border: 2px solid red;
+    border-radius: 10px;
+    width: 30%;
+    margin: 10px;
+    
+}

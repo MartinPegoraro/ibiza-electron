@@ -19,12 +19,9 @@ const productTragos = document.querySelector('#productTrago');
 const productPostres = document.querySelector('#productPostre');
 
 const productSelect = document.getElementById('menu')
-const productList = document.querySelector('#productList');
 
-const productFechas = document.querySelector('#productofecha');
 const dia = document.querySelector('#dia');
-
-const ventasSem = document.querySelector('#ventasSem')
+// const pagVentas = document.querySelector('#ventas');
 
 const { ipcRenderer, remote } = require('electron');
 
@@ -96,11 +93,11 @@ function updateTask(id) {
 
 };
 
+
 // sumar productos
 var acum = 0
 function addCant(id) {
     const cantid = document.getElementById(id).value;
-
 
     const task = tasks.find(task => {
         return task._id === id
@@ -115,17 +112,11 @@ function addCant(id) {
     }
 
     fechas.push(fecha)
+
+    fechas.map(e => {
+        console.log(e);
+    })
     ipcRenderer.send('new-date', fecha)
-
-
-
-    // const venta = {
-    //     id: id,
-    //     cantidad: cantid
-    // }
-
-    // ventas.push(venta);
-    // renderVenta(ventas)
 
     var mult
     tasks.find(i => {
@@ -506,7 +497,6 @@ productForm.addEventListener('submit', e => {
 
     }
 
-
     if (!updateStatus) {
         ipcRenderer.send('new-task', task)
     } else {
@@ -556,18 +546,7 @@ ipcRenderer.on('update-task-success', (e, args) => {
     renderTasks(tasks)
 });
 
-//guardar las fechas
-// productFechas.addEventListener('submit', e => {
-//     e.preventDefault();
-//     console.log('abc', e);
 
-//     const fecha = {
-//         name: productName.value,
-//         date: dia.value
-//     }
-
-//     ipcRenderer.send('new-date', fecha)
-// })
 
 
 
