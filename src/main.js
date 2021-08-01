@@ -57,12 +57,18 @@ function createWindow() {
     win.loadFile('src/index.html')
     let mainMenu = Menu.buildFromTemplate(templateMenu);
     win.setMenu(mainMenu);
+
+    win.on('closed', () => {
+        app.quit();
+    })
+
 }
 
 function createVentas() {
     const winventa = new BrowserWindow({
         width: 1500,
         height: 700,
+        icon: __dirname + './img/ibiza.ico',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -107,17 +113,44 @@ ipcMain.on('update-task', async (e, args) => {
 
 //crear y guardar las ventas del finde
 ipcMain.on('new-date', async (e, args) => {
-    const newDate = new Fecha(args)
-    const DateSaved = await newDate.save();
-    e.reply('new-date-create', JSON.stringify(DateSaved));
+    const existDate = await Fecha.findOne({ date: args.date, name: args.name })
+    if (!existDate) {
+        const newDate = new Fecha(args)
+        await newDate.save();
+    } else {
+        const sum = parseFloat(args.cantidad) + existDate.cantidad;
+        const updateDate = await Fecha.findByIdAndUpdate(
+            existDate._id,
+            {
+                name: args.name,
+                date: args.date,
+                cantidad: sum
+            }, { new: true }
+        )
+    }
+})
+ipcMain.on('rest-date', async (e, fecha) => {
+    const existDate = await Fecha.findOne({ date: fecha.date, name: fecha.name })
+    if (!existDate) {
+        confirm('Este producto todavia no fue cargado')
+    } else {
+        const rest = existDate.cantidad - parseFloat(fecha.cantidad)
+        await Fecha.findByIdAndUpdate(
+            existDate._id,
+            {
+                name: fecha.name,
+                date: fecha.date,
+                cantidad: rest
+            }, { new: true }
+        )
+    }
 })
 
 ipcMain.on('get-dates', async (e, args) => {
-    const fechas = await Fecha.find({ date: args }).sort({ name: -1 });
+    const fechas = await Fecha.find({ date: args }).sort({ name: 1 });
     const oneFecha = await Fecha.findOne({ date: args })
-
+    // console.log();
     const fec = oneFecha.date.toUTCString();
-
     e.reply('get-dates', JSON.stringify(fechas), fec)
 })
 

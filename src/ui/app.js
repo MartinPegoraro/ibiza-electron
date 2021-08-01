@@ -103,7 +103,6 @@ function addCant(id) {
         return task._id === id
     })
 
-
     //guardar las fechas
     const fecha = {
         name: task.name,
@@ -112,10 +111,6 @@ function addCant(id) {
     }
 
     fechas.push(fecha)
-
-    fechas.map(e => {
-        console.log(e);
-    })
     ipcRenderer.send('new-date', fecha)
 
     var mult
@@ -124,9 +119,7 @@ function addCant(id) {
             mult = i.price * cantid
             acum = acum + mult
             document.getElementById("canTotal").innerHTML = acum;
-
         }
-
     })
     document.getElementById(id).value = "";
 }
@@ -134,7 +127,19 @@ function addCant(id) {
 
 //restar productos
 function restCant(id) {
-    const cantid = document.getElementById(id).value
+    const cantid = document.getElementById(id).value;
+
+    const task = tasks.find(task => {
+        return task._id === id
+    })
+
+    const fecha = {
+        name: task.name,
+        date: dia.value,
+        cantidad: cantid
+    }
+    ipcRenderer.send('rest-date', fecha)
+
     var mult
     tasks.find(i => {
         if (i._id === id) {
@@ -513,6 +518,7 @@ ipcRenderer.on('new-task-create', (e, args) => {
     renderTasks(tasks)
 })
 
+// Obtener todos los productos
 ipcRenderer.send('get-tasks');
 
 ipcRenderer.on('get-tasks', (e, args) => {
