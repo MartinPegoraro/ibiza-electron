@@ -2,6 +2,7 @@ const { BrowserWindow, ipcMain, Menu, app } = require('electron')
 
 const Task = require('./models/Task');
 const Fecha = require('./models/Fechas');
+const Monto = require('./models/Venta');
 
 let templateMenu = [
     {
@@ -112,8 +113,24 @@ ipcMain.on('update-task', async (e, args) => {
 // PESTAÑA DE VENTAS
 
 //crear y guardar las ventas del finde
-ipcMain.on('new-date', async (e, args) => {
+ipcMain.on('new-date', async (e, args, monto) => {
+    const existMonto = await Monto.findOne({ fecha: monto.fecha })
     const existDate = await Fecha.findOne({ date: args.date, name: args.name })
+
+    if (!existMonto) {
+        const newMonto = new Monto({ fecha: monto.fecha, monto: monto.monto });
+        await newMonto.save();
+    } else {
+        acum = monto.monto + existMonto.monto
+        await Monto.findByIdAndUpdate(
+            existMonto._id,
+            {
+                fecha: monto.fecha,
+                monto: acum
+            }, { new: true }
+        )
+    }
+
     if (!existDate) {
         const newDate = new Fecha(args)
         await newDate.save();
@@ -129,8 +146,23 @@ ipcMain.on('new-date', async (e, args) => {
         )
     }
 })
-ipcMain.on('rest-date', async (e, fecha) => {
-    const existDate = await Fecha.findOne({ date: fecha.date, name: fecha.name })
+ipcMain.on('rest-date', async (e, fecha, monto) => {
+    const existMonto = await Monto.findOne({ fecha: monto.fecha })
+    const existDate = await Fecha.findOne({ date: fecha.date, name: fecha.name });
+
+    if (!existMonto) {
+        confirm('Este producto todavia no fue cargado')
+    } else {
+        acum = existMonto.monto - monto.monto
+        await Monto.findByIdAndUpdate(
+            existMonto._id,
+            {
+                fecha: monto.fecha,
+                monto: acum
+            }, { new: true }
+        )
+    }
+
     if (!existDate) {
         confirm('Este producto todavia no fue cargado')
     } else {
@@ -147,11 +179,12 @@ ipcMain.on('rest-date', async (e, fecha) => {
 })
 
 ipcMain.on('get-dates', async (e, args) => {
+    const existMonto = await Monto.findOne({ fecha: args });
     const fechas = await Fecha.find({ date: args }).sort({ name: 1 });
     const oneFecha = await Fecha.findOne({ date: args })
-    // console.log();
+    // console.log(existMonto.monto);
     const fec = oneFecha.date.toUTCString();
-    e.reply('get-dates', JSON.stringify(fechas), fec)
+    e.reply('get-dates', JSON.stringify(fechas), fec, existMonto.monto)
 })
 
 

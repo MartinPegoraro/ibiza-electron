@@ -34,6 +34,24 @@ h3{
     font-size: 22px;
     border-bottom: 2px solid rgb(104, 104, 104);
 }
+
+h2{
+    display: inline;
+}
+
+#montotot{
+    font-size: 30px;
+    color: tomato;
+    font-family: cursive;
+    transition: color 500ms, transform 500ms;
+}
+
+#montotot:hover{
+    background: transparent;
+    color: red;
+    transform: scale(2, 2);
+}
+
 span{
     font-size: 25px;
     color: rgb(0, 0, 0);

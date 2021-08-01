@@ -1,16 +1,17 @@
 const pagVentas = document.querySelector('#ventas');
-const mostrarDia = document.querySelector('#viewDay')
+const mostrarDia = document.querySelector('#viewDay');
+const monto = document.querySelector('#monto')
 const search = document.querySelector('#search')
 const datesearch = document.querySelector('#datesearch')
 const { ipcRenderer, remote } = require('electron');
 
 // VENTANA DE VENTAS
 
-function renderVentas(fechas, b) {
+function renderVentas(fechas, b, montoTot) {
     mostrarDia.innerHTML = '';
     pagVentas.innerHTML = '';
 
-    // console.log(typeof (a));
+    // console.log(montoTot);
 
     if (b.substr(0, 3) === 'Sat') {
         mostrarDia.innerHTML = `<h1 id='dia'> VENTA DEL SABADO ${b.substr(5, 6)} </h1>`
@@ -27,6 +28,8 @@ function renderVentas(fechas, b) {
     } else if (b.substr(0, 3) === 'Mon') {
         mostrarDia.innerHTML = `<h1 id='dia'> VENTA DEL LUNES ${b.substr(5, 6)}</h1>`
     }
+
+    monto.innerHTML = `<h2> El MONTO VENDIDO ESTE DIA FUE DE: </h2> <h2 id='montotot'>${montoTot}</h2>`
 
     fechas.map(e => {
 
@@ -47,8 +50,9 @@ search.addEventListener('submit', e => {
     ipcRenderer.send('get-dates', datesearch.value);
 })
 
-ipcRenderer.on('get-dates', (e, args, b) => {
+ipcRenderer.on('get-dates', (e, args, b, monto) => {
     const dates = JSON.parse(args)
+    montoTot = parseFloat(monto)
     // fechas = datesReceived;
-    renderVentas(dates, b)
+    renderVentas(dates, b, montoTot)
 });

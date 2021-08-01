@@ -103,6 +103,13 @@ function addCant(id) {
         return task._id === id
     })
 
+    // guardar el monto en la BD
+    suma = task.price * cantid
+    const monto = {
+        fecha: dia.value,
+        monto: suma
+    }
+
     //guardar las fechas
     const fecha = {
         name: task.name,
@@ -111,7 +118,7 @@ function addCant(id) {
     }
 
     fechas.push(fecha)
-    ipcRenderer.send('new-date', fecha)
+    ipcRenderer.send('new-date', fecha, monto)
 
     var mult
     tasks.find(i => {
@@ -133,12 +140,20 @@ function restCant(id) {
         return task._id === id
     })
 
+    // Restar el monto solicitado a la BD
+    suma = task.price * cantid
+    const monto = {
+        fecha: dia.value,
+        monto: suma
+    }
+
+    //restar la cantidad al producto guardado en BD
     const fecha = {
         name: task.name,
         date: dia.value,
         cantidad: cantid
     }
-    ipcRenderer.send('rest-date', fecha)
+    ipcRenderer.send('rest-date', fecha, monto)
 
     var mult
     tasks.find(i => {
